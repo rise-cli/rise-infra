@@ -5,6 +5,8 @@ function getFile(path) {
     return data
 }
 module.exports.deploy = async (cli, aws, flags) => {
+    const stage = flags.stage || 'dev'
+    const region = flags.region || 'us-east-1'
     try {
         const config = require(process.cwd() + '/rise.js')
         const file = getFile(process.cwd() + '/template.yml')
@@ -13,7 +15,7 @@ module.exports.deploy = async (cli, aws, flags) => {
         await aws.cloudformation.deployStack({
             name: config.name + stage,
             template: file,
-            region: flags.region
+            region: region
         })
 
         cli.terminal.clear()
