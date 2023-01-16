@@ -1,5 +1,5 @@
 Resources:
-    stressTrackerTable:
+    ExampleTable:
         Type: AWS::DynamoDB::Table
         Properties:
             TableName: ExampleTable
@@ -14,3 +14,4 @@ Resources:
                 - AttributeName: SK
                   KeyType: RANGE
             BillingMode: PAY_PER_REQUEST
+

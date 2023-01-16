@@ -18,11 +18,11 @@ rise-infra deploy
 
 ## What a project looks like
 
-A project must have a `rise.js` file at the root of the project that looks like the following:
+A project must have a `rise.mjs` file at the root of the project that looks like the following:
 
 ```js
 // static.js
-module.exports = {
+export default {
     name: 'NameOfTemplate'
 }
 ```
