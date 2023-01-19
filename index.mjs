@@ -20,10 +20,12 @@ cli.addCommand({
     action: async (flags) => {
         console.time('✅ Deployed Successfully \x1b[2mDeploy Time')
         cli.hideCursor()
+
         const config = await filesystem.getJsFile({
             path: '/rise.mjs',
             projectRoot: process.cwd()
         })
+
         const template = await filesystem.getTextContent({
             path: '/template.yml',
             projectRoot: process.cwd()
