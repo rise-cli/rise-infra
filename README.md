@@ -16,6 +16,14 @@ npm i -g rise-infra
 rise-infra deploy
 ```
 
+## How to remove a project
+
+`cd` into a project that has a template.yml file containing CloudFormation
+
+```js
+rise-infra remove
+```
+
 ## What a project looks like
 
 A project must have a `rise.mjs` file at the root of the project that looks like the following:

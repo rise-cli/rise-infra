@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import * as cli from 'rise-cli-foundation'
-import { deployInfra } from 'rise-deployinfra'
+import { deployInfra, removeInfra } from 'rise-deployinfra'
 import * as filesystem from 'rise-filesystem-foundation'
 import process from 'node:process'
 
@@ -32,7 +32,7 @@ cli.addCommand({
         })
 
         const result = await deployInfra({
-            name: config.name,
+            name: config.default.name,
             stage: flags.stage,
             region: flags.region,
             template: template,
@@ -71,7 +71,7 @@ cli.addCommand({
         filesystem.writeFile({
             path: '/template.yml',
             content: `Resources:
-    ExampleTable:
+    Table:
         Type: AWS::DynamoDB::Table
         Properties:
             TableName: ExampleTable
@@ -86,7 +86,11 @@ cli.addCommand({
                 - AttributeName: SK
                   KeyType: RANGE
             BillingMode: PAY_PER_REQUEST
-
+Outputs:
+    TableName:
+        Value: !Ref Table
+    TableArn:
+        Value: !GetAtt Table.Arn
 `,
             projectRoot: process.cwd()
         })
@@ -109,7 +113,27 @@ cli.addCommand({
         }
     ],
     action: async (flags) => {
-        console.log('in development...')
+        console.time('✅ Removed Successfully \x1b[2mTime')
+        cli.hideCursor()
+
+        const config = await filesystem.getJsFile({
+            path: '/rise.mjs',
+            projectRoot: process.cwd()
+        })
+
+        const result = await removeInfra({
+            name: config.default.name,
+            stage: flags.stage,
+            region: flags.region
+        })
+
+        if (result.status === 'error') {
+            throw new Error(result.message)
+        }
+
+        cli.clear()
+        console.timeEnd('✅ Removed Successfully \x1b[2mTime')
+        cli.showCursor()
     }
 })
 

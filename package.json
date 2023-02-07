@@ -1,8 +1,11 @@
 {
     "name": "rise-infra",
-    "version": "0.0.3",
+    "version": "0.0.7",
     "description": "",
-    "main": "index.js",
+    "main": "index.mjs",
+    "bin": {
+        "rise-infra": "./index.mjs"
+    },
     "scripts": {
         "test": "node --test && echo \"✅ Tests Pass\"",
         "release": "npm run test && npm publish"
@@ -11,8 +14,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "rise-aws-foundation": "^0.0.10",
-        "rise-deployinfra": "^0.0.3",
+        "rise-aws-foundation": "^0.0.11",
+        "rise-cli-foundation": "^0.0.14",
+        "rise-deployinfra": "^0.0.6",
         "rise-filesystem-foundation": "^0.0.1"
     }
 }
