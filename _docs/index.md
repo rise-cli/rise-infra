@@ -1,5 +1,7 @@
 # Rise Infra
 
+[Github](https://github.com/rise-cli/rise-infra)
+
 Rise Infra is a CLI that helps you deploy Cloudformation template.yml files. The CloudFormation CLI is already a pretty nice CLI solution. This CLI is mostly to give consistency to projects that are already using other rise frameworks.
 
 ## How to install
